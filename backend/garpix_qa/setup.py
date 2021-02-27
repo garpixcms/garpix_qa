@@ -1,9 +1,17 @@
 from setuptools import setup, find_packages
+from os import path
+
+here = path.join(path.abspath(path.dirname(__file__)), 'garpix_qa')
+
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='garpix_qa',
-    version='1.0.2',
+    version='1.0.5',
     description='Checking the Django project for quality',
+    long_description=long_description,
+    url='https://github.com/garpixcms/garpix_qa',
     author='Garpix LTD',
     author_email='info@garpix.com',
     license='MIT',

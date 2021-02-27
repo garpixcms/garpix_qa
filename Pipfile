@@ -13,6 +13,7 @@ radon = "*"
 flake8-polyfill = "*"
 bandit = "*"
 twine = "*"
+m2r = "*"
 
 [dev-packages]
 
