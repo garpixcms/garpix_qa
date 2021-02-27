@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+environs = "*"
+psycopg2-binary = "*"
+coverage = "*"
+flake8 = "*"
+radon = "*"
+flake8-polyfill = "*"
+bandit = "*"
+twine = "*"
+m2r = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
