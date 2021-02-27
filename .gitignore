@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# other
+.idea
+/dumps
+/data
+/public/media/*
+!/public/media/.gitkeep
+/public/static/*
+!/public/static/.gitkeep
+tmp
