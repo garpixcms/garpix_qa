@@ -135,3 +135,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 # License
 
 [MIT](LICENSE)
+
+---
+
+Developed by Garpix / [https://garpix.com](https://garpix.com)
