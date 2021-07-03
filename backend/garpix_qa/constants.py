@@ -4,6 +4,7 @@ CONFIG_FILE_CONTENT_FLAKE8 = '''[flake8]
 ignore = E501
 exclude = .git,__pycache__,old,build,dist,venv,*/migrations/*,*/settings/*
 max-complexity = 10
+per-file-ignores = __init__.py: F401, F403
 '''
 
 # radon
