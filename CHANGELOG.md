@@ -1,3 +1,7 @@
+### 1.1.0 (13.01.2022)
+
+- Added to flake8: `flake8-django`.
+
 ### 1.0.6 (03.07.2021)
 
 - Added to flake8 config: `per-file-ignores = __init__.py: F401, F403`.
