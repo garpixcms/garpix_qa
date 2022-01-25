@@ -78,6 +78,16 @@ def run_qa(directory, verbose=False):
         print_error(lines)
         error_count += 1
 
+    # Project migrations
+    print_default('Project migrations')
+    cmd = f'python3 {directory}/manage.py makemigrations --check --dry-run'
+    lines = shell_run(cmd)
+    if 'No changes detected' in lines:
+        print_ok(lines, verbose)
+    else:
+        print_error(lines)
+        error_count += 1
+
     # *** RESULT ***
     end_at = datetime.datetime.now()
     duration = end_at - start_at
