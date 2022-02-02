@@ -1,3 +1,7 @@
+### 1.4.0 (02.02.2022)
+
+- Migrations creation check added.
+
 ### 1.3.0 (13.01.2022)
 
 - Added to flake8: `flake8-django`.
