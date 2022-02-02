@@ -1,3 +1,7 @@
+### 1.5.0 (02.02.2022)
+
+- Fixed bug with `garpix_page` tests.
+
 ### 1.4.0 (02.02.2022)
 
 - Migrations creation check added.

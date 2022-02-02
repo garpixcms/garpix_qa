@@ -8,7 +8,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='garpix_qa',
-    version='1.4.0',
+    version='1.5.0',
     description='Checking the Django project for quality',
     long_description=long_description,
     url='https://github.com/garpixcms/garpix_qa',
