@@ -9,6 +9,7 @@ import datetime
 from .constants import CONFIG_FILE_NAME_FLAKE8, CONFIG_FILE_CONTENT_FLAKE8
 from .constants import CONFIG_FILE_NAME_RADON, CONFIG_FILE_CONTENT_RADON
 from .constants import CONFIG_FILE_NAME_BANDIT, CONFIG_FILE_CONTENT_BANDIT
+from django.conf import settings
 
 
 def create_config(directory, config_file_name, config_file_content):
@@ -58,6 +59,17 @@ def run_qa(directory, verbose=False):
     else:
         print_error(lines)
         error_count += 1
+
+    # Unit tests garpix_page
+    if 'garpix_page' in settings.INSTALLED_APPS:
+        print_default('Django unit tests garpix_page')
+        cmd = f'python3 {directory}/manage.py test garpix_page --keepdb'
+        lines = shell_run(cmd)
+        if 'OK' in lines:
+            print_ok(lines, verbose)
+        else:
+            print_error(lines)
+            error_count += 1
 
     # Cyclomatic complexity
     print_default(f'Cyclomatic complexity with radon (see "{CONFIG_FILE_NAME_RADON}")')
