@@ -1,3 +1,7 @@
+### 1.6.0 (15.02.2022)
+
+- Fixed a problem in displaying the results of passing unit tests.
+
 ### 1.5.0 (02.02.2022)
 
 - Fixed bug with `garpix_page` tests.
