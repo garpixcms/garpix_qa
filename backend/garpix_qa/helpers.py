@@ -46,8 +46,8 @@ def shell_run(cmd):
     return lines
 
 
-def run_unit_tests(apps=None):
-    cmd = ['python', 'manage.py', 'test']
+def run_unit_tests(directory, apps=None):
+    cmd = ['python3', f'{directory}manage.py', 'test']
     if apps is not None:
         cmd.append(apps)
     ps = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)  # nosec

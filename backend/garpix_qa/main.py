@@ -53,7 +53,7 @@ def run_qa(directory, verbose=False):
 
     # Unit tests
     print_default('Django unit tests')
-    tests_result = run_unit_tests()
+    tests_result = run_unit_tests(f'{directory}/')
 
     if not tests_result.endswith("OK\n"):
         print_error(tests_result)
@@ -64,7 +64,7 @@ def run_qa(directory, verbose=False):
     # Unit tests garpix_page
     if 'garpix_page' in settings.INSTALLED_APPS:
         print_default('Django unit tests garpix_page')
-        garpix_tests_result = run_unit_tests('garpix_page')
+        garpix_tests_result = run_unit_tests(f'{directory}/', 'garpix_page')
 
         if not garpix_tests_result.endswith("OK\n"):
             print_error(garpix_tests_result)
