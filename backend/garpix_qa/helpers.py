@@ -46,23 +46,11 @@ def shell_run(cmd):
     return lines
 
 
-def run_unit_tests(apps):
-    old_stderr = sys.stderr
-    old_stdout = sys.stdout
-    new_stdout = io.StringIO()
-    sys.stdout = new_stdout
-    sys.stderr = new_stdout
-
-    TestRunner = get_runner(settings)
-    test_runner = TestRunner(keepdb=True)
-    failures = test_runner.run_tests(apps)
-
-    output = new_stdout.getvalue()
-
-    sys.stderr = old_stderr
-    sys.stdout = old_stdout
-
-    return {
-        "failures": failures,
-        "output": output
-    }
+def run_unit_tests(apps=None):
+    cmd = ['python', 'manage.py', 'test']
+    if apps is not None:
+        cmd.append(apps)
+    ps = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)  # nosec
+    lines = ps.communicate()
+    output = '\n'.join(x.decode("utf-8") for x in lines if x is not None)
+    return output
