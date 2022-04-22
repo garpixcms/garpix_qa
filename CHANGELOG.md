@@ -1,3 +1,7 @@
+### 1.7.0 (22.02.2022)
+
+- Fix test output error
+
 ### 1.6.0 (15.02.2022)
 
 - Fixed a problem in displaying the results of passing unit tests.
