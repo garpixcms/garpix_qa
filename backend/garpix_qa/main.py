@@ -51,27 +51,6 @@ def run_qa(directory, verbose=False):
         print_error(lines)
         error_count += 1
 
-    # Unit tests
-    print_default('Django unit tests')
-    tests_result = run_unit_tests(())
-
-    if tests_result['failures']:
-        print_error(tests_result['output'])
-        error_count += 1
-    else:
-        print_ok('', verbose)
-
-    # Unit tests garpix_page
-    if 'garpix_page' in settings.INSTALLED_APPS:
-        print_default('Django unit tests garpix_page')
-        garpix_tests_result = run_unit_tests(('garpix_page', ))
-
-        if garpix_tests_result['failures']:
-            print_error(garpix_tests_result['output'])
-            error_count += 1
-        else:
-            print_ok('', verbose)
-
     # Cyclomatic complexity
     print_default(f'Cyclomatic complexity with radon (see "{CONFIG_FILE_NAME_RADON}")')
     cmd = f'radon cc {directory}'
@@ -100,6 +79,27 @@ def run_qa(directory, verbose=False):
     else:
         print_error(lines)
         error_count += 1
+
+    # Unit tests
+    print_default('Django unit tests')
+    tests_result = run_unit_tests(())
+
+    if tests_result['failures']:
+        print_error(tests_result['output'])
+        error_count += 1
+    else:
+        print_ok('', verbose)
+
+    # Unit tests garpix_page
+    if 'garpix_page' in settings.INSTALLED_APPS:
+        print_default('Django unit tests garpix_page')
+        garpix_tests_result = run_unit_tests(('garpix_page', ))
+
+        if garpix_tests_result['failures']:
+            print_error(garpix_tests_result['output'])
+            error_count += 1
+        else:
+            print_ok('', verbose)
 
     # *** RESULT ***
     end_at = datetime.datetime.now()
