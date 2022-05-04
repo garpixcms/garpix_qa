@@ -1,3 +1,7 @@
+### (02.05.2022)
+
+- Django pytest support added
+
 ### 1.7.0 (22.02.2022)
 
 - Fix test output error

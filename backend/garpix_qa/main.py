@@ -1,16 +1,20 @@
 import os
+
 from .helpers import print_header
 from .helpers import print_default
-from .helpers import shell_run
-from .helpers import print_error
-from .helpers import print_ok
 from .helpers import print_empty
-from .helpers import run_unit_tests
+
+from .checks import check_flake
+from .checks import check_radon
+from .checks import check_security_linter
+from .checks import check_migrations
+from .checks import check_unit_tests
+from .checks import check_garpix_page_tests
+
 import datetime
 from .constants import CONFIG_FILE_NAME_FLAKE8, CONFIG_FILE_CONTENT_FLAKE8
 from .constants import CONFIG_FILE_NAME_RADON, CONFIG_FILE_CONTENT_RADON
 from .constants import CONFIG_FILE_NAME_BANDIT, CONFIG_FILE_CONTENT_BANDIT
-from django.conf import settings
 
 
 def create_config(directory, config_file_name, config_file_content):
@@ -41,65 +45,22 @@ def run_qa(directory, verbose=False):
     print_header('Checking')
 
     # flake8 for backend
-    print_default(f'Checking style guide with flake8 (see "{CONFIG_FILE_NAME_FLAKE8}")')
-    backend_dir = directory
-    cmd = f'flake8 {backend_dir}'
-    lines = shell_run(cmd)
-    if lines == '':
-        print_ok(lines, verbose)
-    else:
-        print_error(lines)
-        error_count += 1
+    error_count += check_flake(directory, verbose, CONFIG_FILE_NAME_FLAKE8)
 
     # Cyclomatic complexity
-    print_default(f'Cyclomatic complexity with radon (see "{CONFIG_FILE_NAME_RADON}")')
-    cmd = f'radon cc {directory}'
-    lines = shell_run(cmd)
-    if lines == '':
-        print_ok(lines, verbose)
-    else:
-        print_error(lines)
-        error_count += 1
+    error_count += check_radon(directory, verbose, CONFIG_FILE_NAME_RADON)
 
     # Security linter
-    print_default(f'Security lint with bandit (only high-severity issues, see "{CONFIG_FILE_NAME_BANDIT}")')
-    lines = shell_run(f'bandit -r {directory} -lll')
-    if 'No issues identified' in lines:
-        print_ok(lines, verbose)
-    else:
-        print_error(lines)
-        error_count += 1
+    error_count += check_security_linter(directory, verbose, CONFIG_FILE_NAME_BANDIT)
 
     # Project migrations
-    print_default('Project migrations')
-    cmd = f'python3 {directory}/manage.py makemigrations --check --dry-run'
-    lines = shell_run(cmd)
-    if 'No changes detected' in lines:
-        print_ok(lines, verbose)
-    else:
-        print_error(lines)
-        error_count += 1
+    error_count += check_migrations(directory, verbose)
 
     # Unit tests
-    print_default('Django unit tests')
-    tests_result = run_unit_tests(())
-
-    if tests_result['failures']:
-        print_error(tests_result['output'])
-        error_count += 1
-    else:
-        print_ok('', verbose)
+    error_count += check_unit_tests(directory, verbose)
 
     # Unit tests garpix_page
-    if 'garpix_page' in settings.INSTALLED_APPS:
-        print_default('Django unit tests garpix_page')
-        garpix_tests_result = run_unit_tests(('garpix_page', ))
-
-        if garpix_tests_result['failures']:
-            print_error(garpix_tests_result['output'])
-            error_count += 1
-        else:
-            print_ok('', verbose)
+    error_count += check_garpix_page_tests(verbose)
 
     # *** RESULT ***
     end_at = datetime.datetime.now()
