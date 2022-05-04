@@ -1,12 +1,11 @@
 import sys
 import io
 import subprocess
+from django.test.runner import DiscoverRunner
 from .colors import RESET
 from .colors import GREEN
 from .colors import RED
 from .colors import BOLD
-from django.test.utils import get_runner
-from django.conf import settings
 
 
 def print_default(text=''):
@@ -47,25 +46,17 @@ def shell_run(cmd):
 
 
 def run_unit_tests(apps):
-    old_stderr = sys.stderr
-    old_stdout = sys.stdout
-
+    old_stderr, old_stdout = sys.stderr, sys.stdout
     new_stdout = io.StringIO()
-    sys.stdout = new_stdout
-    sys.stderr = new_stdout
-
+    sys.stdout, sys.stderr = new_stdout, new_stdout
     try:
-        TestRunner = get_runner(settings)
-        test_runner = TestRunner(keepdb=True)
+        test_runner = DiscoverRunner(keepdb=True)
         failures = test_runner.run_tests(apps)
         output = new_stdout.getvalue()
-        sys.stderr = old_stderr
-        sys.stdout = old_stdout
+        sys.stderr, sys.stdout = old_stderr, old_stdout
     except Exception as e:
-        sys.stderr = old_stderr
-        sys.stdout = old_stdout
+        sys.stderr, sys.stdout = old_stderr, old_stdout
         raise e
-
     return {
         "failures": failures,
         "output": output
