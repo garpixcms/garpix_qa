@@ -1,4 +1,4 @@
-### (02.05.2022)
+### 1.8.0 (02.05.2022)
 
 - Django pytest support added
 
