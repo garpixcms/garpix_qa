@@ -22,13 +22,38 @@ CONFIG_FILE_CONTENT_BANDIT = '''[bandit]
 CONFIG_FILE_NAME_LIGHTHOUSE = 'lighthouserc.json'
 CONFIG_FILE_CONTENT_LIGHTHOUSE = '''
 {
-    "ci": {
-        "collect": {
-            "url": "http://127.0.0.1:8000/admin/"
-        },
-        "assert": {
-            "preset": "lighthouse:recommended"
-        }
+  "ci": {
+    "collect": {
+      "url": "http://127.0.0.1:8000/"
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.89
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.89
+          }
+        ],
+        "categories:best-practices": [
+          "error",
+          {
+            "minScore": 0.89
+          }
+        ],
+        "categories:SEO": [
+          "error",
+          {
+            "minScore": 0.89
+          }
+        ]
+      }
     }
+  }
 }
 '''
