@@ -10,11 +10,13 @@ from .checks import check_security_linter
 from .checks import check_migrations
 from .checks import check_unit_tests
 from .checks import check_garpix_page_tests
+from .checks import check_lighthouse
 
 import datetime
 from .constants import CONFIG_FILE_NAME_FLAKE8, CONFIG_FILE_CONTENT_FLAKE8
 from .constants import CONFIG_FILE_NAME_RADON, CONFIG_FILE_CONTENT_RADON
 from .constants import CONFIG_FILE_NAME_BANDIT, CONFIG_FILE_CONTENT_BANDIT
+from .constants import CONFIG_FILE_NAME_LIGHTHOUSE, CONFIG_FILE_CONTENT_LIGHTHOUSE
 
 
 def create_config(directory, config_file_name, config_file_content):
@@ -28,9 +30,10 @@ def create_configuration_files(directory):
     create_config(directory, CONFIG_FILE_NAME_FLAKE8, CONFIG_FILE_CONTENT_FLAKE8)
     create_config(directory, CONFIG_FILE_NAME_RADON, CONFIG_FILE_CONTENT_RADON)
     create_config(directory, CONFIG_FILE_NAME_BANDIT, CONFIG_FILE_CONTENT_BANDIT)
+    create_config(directory, CONFIG_FILE_NAME_LIGHTHOUSE, CONFIG_FILE_CONTENT_LIGHTHOUSE)
 
 
-def run_qa(directory, verbose=False):
+def run_qa(directory, verbose: bool = False, all: bool = False):
     #
     os.chdir(directory)
     create_configuration_files(directory)
@@ -61,6 +64,10 @@ def run_qa(directory, verbose=False):
 
     # Unit tests garpix_page
     error_count += check_garpix_page_tests(verbose)
+
+    # Lighthouse
+    if all:
+        error_count += check_lighthouse(verbose)
 
     # *** RESULT ***
     end_at = datetime.datetime.now()

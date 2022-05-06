@@ -14,7 +14,14 @@ class Command(BaseCommand):
             help='Verbose mode',
         )
 
+        parser.add_argument(
+            '--all', '-a',
+            action='store_true',
+            help='Run all checks (includes Lighthouse)',
+        )
+
     def handle(self, *args, **options):
         directory = os.path.abspath(os.path.join(settings.BASE_DIR))
         verbose = options['verbose']
-        run_qa(directory, verbose)
+        all = options['all']
+        run_qa(directory, verbose, all)

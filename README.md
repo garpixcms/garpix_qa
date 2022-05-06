@@ -28,10 +28,28 @@ INSTALLED_APPS = [
 ]
 ```
 
+To use lighthouse scoring, install `Lighthouse CI` with `npm`:
+
+```bash
+npm install -g @lhci/cli
+```
+
 Check your project:
 
 ```bash
 python manage.py qa
+```
+
+Check your project with lighthouse:
+
+(requires Lighthouse CI installed)
+
+```bash
+python manage.py qa -a
+```
+
+```bash
+python manage.py qa --all
 ```
 
 Check your project with all logs:
@@ -123,6 +141,11 @@ Result
   Duration: 0:00:04.031263
 
 ```
+
+## Configure Lighthouse CI
+Create `lighthouserc.json` in project root to set URL and configure assertions. 
+
+Reference: https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md
 
 # Changelog
 
