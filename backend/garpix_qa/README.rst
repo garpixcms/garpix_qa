@@ -38,6 +38,17 @@ Check your project:
 
    python manage.py qa
 
+Check your project with Lighthouse:
+
+(requires Lighthouse CI installed)
+
+.. code-block:: bash
+   python manage.py qa -a
+
+.. code-block:: bash
+   python manage.py qa --all
+
+
 Check your project with all logs:
 
 .. code-block:: bash
@@ -127,6 +138,12 @@ Example output with problems
      Problems found: 2
      End at: 2021-02-27 12:23:45.098015
      Duration: 0:00:04.031263
+
+Configure Lighthouse CI
+=======================
+Edit ``lighthouserc.json`` to set URL and configure assertions. 
+
+Reference: https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md
 
 Changelog
 =========
