@@ -88,13 +88,14 @@ def check_garpix_page_tests(verbose):
     return 0
 
 
-def check_lighthouse(verbose: bool = False) -> int:
+def check_lighthouse(verbose: bool = False, clear_reports: bool = False) -> int:
     print_default('Lighthouse CI')
     shell_run('lhci collect')
     lines = shell_run('lhci assert')
+    if clear_reports:
+        shell_run('rm -rf .lighthouseci')
     if 'Assertion failed' in lines:
         print_error(lines)
-        shell_run('lhci open')
         return 1
     print_ok(lines, verbose)
     return 0

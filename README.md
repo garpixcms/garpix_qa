@@ -40,7 +40,7 @@ Check your project:
 python manage.py qa
 ```
 
-Check your project with Lighthouse:
+Check your project with Lighthouse CI:
 
 (requires Lighthouse CI installed)
 
@@ -50,6 +50,12 @@ python manage.py qa -a
 
 ```bash
 python manage.py qa --all
+```
+
+Optionally, do not save Lighthouse CI report files:
+
+```bash
+python manage.py qa --all --clear-reports
 ```
 
 Check your project with all logs:

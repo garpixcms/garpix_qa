@@ -33,7 +33,9 @@ def create_configuration_files(directory):
     create_config(directory, CONFIG_FILE_NAME_LIGHTHOUSE, CONFIG_FILE_CONTENT_LIGHTHOUSE)
 
 
-def run_qa(directory, verbose: bool = False, all: bool = False):
+def run_qa(
+    directory, verbose: bool = False, all: bool = False, clear_reports: bool = False
+):
     #
     os.chdir(directory)
     create_configuration_files(directory)
@@ -67,7 +69,7 @@ def run_qa(directory, verbose: bool = False, all: bool = False):
 
     # Lighthouse
     if all:
-        error_count += check_lighthouse(verbose)
+        error_count += check_lighthouse(verbose, clear_reports)
 
     # *** RESULT ***
     end_at = datetime.datetime.now()
