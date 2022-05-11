@@ -32,6 +32,11 @@ Add the ``garpix_qa`` to your ``INSTALLED_APPS``\ :
        'garpix_qa',
    ]
 
+To use Lighthouse scoring, install ``Lighthouse CI`` with ``npm``:
+
+.. code-block:: bash
+   npm install -g @lhci/cli
+
 Check your project:
 
 .. code-block:: bash
