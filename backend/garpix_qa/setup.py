@@ -3,7 +3,7 @@ from os import path
 
 here = path.join(path.abspath(path.dirname(__file__)), 'garpix_qa')
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -11,6 +11,7 @@ setup(
     version='1.9.0',
     description='Checking the Django project for quality',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/garpixcms/garpix_qa',
     author='Garpix LTD',
     author_email='info@garpix.com',
