@@ -32,11 +32,32 @@ Add the ``garpix_qa`` to your ``INSTALLED_APPS``\ :
        'garpix_qa',
    ]
 
+To use Lighthouse scoring, install ``Lighthouse CI`` with ``npm``:
+
+.. code-block:: bash
+   npm install -g @lhci/cli
+
 Check your project:
 
 .. code-block:: bash
 
    python manage.py qa
+
+Check your project with Lighthouse CI:
+
+(requires Lighthouse CI installed)
+
+.. code-block:: bash
+   python manage.py qa -a
+
+.. code-block:: bash
+   python manage.py qa --all
+
+Optionally, do not save Lighthouse CI report files:
+
+.. code-block:: bash
+   python manage.py qa --all --clear-reports
+
 
 Check your project with all logs:
 
@@ -127,6 +148,12 @@ Example output with problems
      Problems found: 2
      End at: 2021-02-27 12:23:45.098015
      Duration: 0:00:04.031263
+
+Configure Lighthouse CI
+=======================
+Edit ``lighthouserc.json`` to set URL and configure assertions. 
+
+Reference: https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md
 
 Changelog
 =========

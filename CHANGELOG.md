@@ -1,3 +1,7 @@
+### 1.9.0 (11.05.2022)
+
+- Lighthouse CI added
+
 ### 1.8.0 (02.05.2022)
 
 - Django pytest support added
