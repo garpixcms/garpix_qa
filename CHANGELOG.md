@@ -1,3 +1,7 @@
+### 1.10.0 (29.06.2022)
+
+- Pytest check fixed
+
 ### 1.9.0 (11.05.2022)
 
 - Lighthouse CI added

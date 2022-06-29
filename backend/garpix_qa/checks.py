@@ -60,7 +60,9 @@ def check_unit_tests(directory, verbose):
         lines = shell_run(cmd)
         tests_count = re.findall(r'collected (\d+) item', lines)
         passed_count = re.findall(r'(\d+) passed', lines)
-        if len(tests_count) == 1 and len(passed_count) == 1 and tests_count[0] == passed_count[0]:
+        skipped_count = re.findall(r'(\d+) skipped', lines)
+        if len(tests_count) == 1 and len(passed_count) == 1 and len(skipped_count) == 1 and tests_count[0] == \
+                passed_count[0] + skipped_count[0]:
             print_ok(lines, verbose)
             return 0
         print_error(lines)
