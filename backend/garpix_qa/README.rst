@@ -35,27 +35,95 @@ Add the ``garpix_qa`` to your ``INSTALLED_APPS``\ :
 To use Lighthouse scoring, install ``Lighthouse CI`` with ``npm``:
 
 .. code-block:: bash
+
    npm install -g @lhci/cli
 
-Check your project:
+
+Check your project (default run all the checks excluding Lighthouse CI):
 
 .. code-block:: bash
 
-   python manage.py qa
+    python manage.py qa
+
+
+Check your project by separate options.
+
+Run checking style guide with flake8:
+
+.. code-block:: bash
+
+    python manage.py qa -f
+
+.. code-block:: bash
+
+    python manage.py qa --flake
+
+Run checking cyclomatic complexity with radon
+
+.. code-block:: bash
+
+    python manage.py qa -r
+
+.. code-block:: bash
+
+    python manage.py qa --radon
+
+Run security lint with bandit
+
+.. code-block:: bash
+
+    python manage.py qa -l
+
+.. code-block:: bash
+
+    python manage.py qa --linter
+
+Run django project migrations check
+
+.. code-block:: bash
+
+    python manage.py qa -m
+
+.. code-block:: bash
+
+    python manage.py qa --migrations
+
+Run django unittest
+
+.. code-block:: bash
+
+    python manage.py qa -t
+
+.. code-block:: bash
+
+    python manage.py qa --tests
+
+Run django unit tests for garpix_page
+
+.. code-block:: bash
+
+    python manage.py qa -p
+
+.. code-block:: bash
+
+    python manage.py qa --garpix_page
 
 Check your project with Lighthouse CI:
 
 (requires Lighthouse CI installed)
 
 .. code-block:: bash
+
    python manage.py qa -a
 
 .. code-block:: bash
+
    python manage.py qa --all
 
 Optionally, do not save Lighthouse CI report files:
 
 .. code-block:: bash
+
    python manage.py qa --all --clear-reports
 
 

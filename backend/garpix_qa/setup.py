@@ -8,7 +8,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='garpix_qa',
-    version='1.10.0',
+    version='1.11.0',
     description='Checking the Django project for quality',
     long_description=long_description,
     long_description_content_type='text/markdown',
