@@ -1,5 +1,7 @@
 # Garpix QA
 
+Please use https://github.com/garpixcms/eqator
+
 Checking the Django project for quality. It can be convenient if you include it in CI.
 
 Used packages: 
