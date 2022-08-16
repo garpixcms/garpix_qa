@@ -34,8 +34,12 @@ def create_configuration_files(directory):
 
 
 def run_qa(
-    directory, verbose: bool = False, all: bool = False, clear_reports: bool = False
+        directory, verbose: bool = False, all: bool = False, clear_reports: bool = False,
+        flake: bool = False, radon: bool = False, linter: bool = False, migrations: bool = False, tests: bool = False,
+        garpix_page: bool = False
 ):
+    # Default run all check without lighthouse
+    variables_passed = all or flake or radon or linter or migrations or tests or garpix_page
     #
     os.chdir(directory)
     create_configuration_files(directory)
@@ -50,26 +54,25 @@ def run_qa(
     print_header('Checking')
 
     # flake8 for backend
-    error_count += check_flake(directory, verbose, CONFIG_FILE_NAME_FLAKE8)
+    error_count += check_flake(directory, verbose, CONFIG_FILE_NAME_FLAKE8, all, flake, variables_passed)
 
     # Cyclomatic complexity
-    error_count += check_radon(directory, verbose, CONFIG_FILE_NAME_RADON)
+    error_count += check_radon(directory, verbose, CONFIG_FILE_NAME_RADON, all, radon, variables_passed)
 
     # Security linter
-    error_count += check_security_linter(directory, verbose, CONFIG_FILE_NAME_BANDIT)
+    error_count += check_security_linter(directory, verbose, CONFIG_FILE_NAME_BANDIT, all, linter, variables_passed)
 
     # Project migrations
-    error_count += check_migrations(directory, verbose)
+    error_count += check_migrations(directory, verbose, all, migrations, variables_passed)
 
     # Unit tests
-    error_count += check_unit_tests(directory, verbose)
+    error_count += check_unit_tests(directory, verbose, all, tests, variables_passed)
 
     # Unit tests garpix_page
-    error_count += check_garpix_page_tests(verbose)
+    error_count += check_garpix_page_tests(verbose, all, garpix_page, variables_passed)
 
     # Lighthouse
-    if all:
-        error_count += check_lighthouse(verbose, clear_reports)
+    error_count += check_lighthouse(verbose, all, clear_reports)
 
     # *** RESULT ***
     end_at = datetime.datetime.now()

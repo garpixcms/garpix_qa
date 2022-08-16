@@ -45,7 +45,7 @@ def shell_run(cmd):
     return lines
 
 
-def run_unit_tests(apps):
+def run_unit_tests(apps) -> (int, str):
     old_stderr, old_stdout = sys.stderr, sys.stdout
     new_stdout = io.StringIO()
     sys.stdout, sys.stderr = new_stdout, new_stdout
@@ -57,7 +57,8 @@ def run_unit_tests(apps):
     except Exception as e:
         sys.stderr, sys.stdout = old_stderr, old_stdout
         raise e
-    return {
-        "failures": failures,
-        "output": output
-    }
+    return failures, output
+
+
+def check_needed(all_variable, check_variable, variables_passed):
+    return all_variable or check_variable or not variables_passed

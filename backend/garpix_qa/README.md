@@ -34,10 +34,72 @@ To use Lighthouse scoring, install `Lighthouse CI` with `npm`:
 npm install -g @lhci/cli
 ```
 
-Check your project:
+Check your project (default run all the checks excluding Lighthouse CI):
 
 ```bash
 python manage.py qa
+```
+
+Check your project by separate options.
+
+Run checking style guide with flake8:
+
+```bash
+python manage.py qa -f
+```
+
+```bash
+python manage.py qa --flake
+```
+
+Run checking cyclomatic complexity with radon
+
+```bash
+python manage.py qa -r
+```
+
+```bash
+python manage.py qa --radon
+```
+
+Run security lint with bandit
+
+```bash
+python manage.py qa -l
+```
+
+```bash
+python manage.py qa --linter
+```
+
+Run django project migrations check
+
+```bash
+python manage.py qa -m
+```
+
+```bash
+python manage.py qa --migrations
+```
+
+Run django unittest
+
+```bash
+python manage.py qa -t
+```
+
+```bash
+python manage.py qa --tests
+```
+
+Run django unit tests for garpix_page
+
+```bash
+python manage.py qa -p
+```
+
+```bash
+python manage.py qa --garpix_page
 ```
 
 Check your project with Lighthouse CI:
